@@ -13,6 +13,7 @@ import com.moviefinder.android.R
 import com.moviefinder.android.base.MyApplication
 import com.moviefinder.android.base.ViewModelFactory
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
 
 class DetailMovieFragment : Fragment() {
@@ -24,13 +25,13 @@ class DetailMovieFragment : Fragment() {
         MyApplication.apiComponent.inject(this)
     }
     private var fragmentHolder: Fragment? = null
-    lateinit var detailsViewModel: DetailsMovieViewModel
+    lateinit var detailsViewModel: DetailMovieViewModel
     private var movieID: Int ? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        return inflater.inflate(R.layout.detail_fragment, container, false)
 
     }
 
@@ -38,19 +39,19 @@ class DetailMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentHolder = this
-        init(view)
-        detailsViewModel = ViewModelProviders.of(this,viewModelFactory).get(DetailsMovieViewModel::class.java)
+        init()
+        detailsViewModel = ViewModelProviders.of(this,viewModelFactory).get(DetailMovieViewModel::class.java)
 
         setViewWithData()
     }
 
-    private fun init(view: View) {
+    private fun init() {
         val bundle = arguments
         movieID = bundle!!.getInt("movieId", 0)
     }
 
     private fun setViewWithData() {
-        detailsViewModel.characterDetailsViewModel(movieID!!).observe(fragmentHolder!!, Observer { detailsModel ->
+        detailsViewModel.characterDetailsViewModel(movieID!!).observe(viewLifecycleOwner, Observer { detailsModel ->
             Picasso.get()
                 .load("https://image.tmdb.org/t/p/original" + detailsModel.backDropPath)
                 .centerInside()

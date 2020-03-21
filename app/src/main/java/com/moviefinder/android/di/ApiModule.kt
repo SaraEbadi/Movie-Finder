@@ -1,5 +1,6 @@
 package com.moviefinder.android.di
 
+import com.moviefinder.android.retrofit.RetrofitMainInterface
 import com.moviefinder.android.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -41,5 +42,6 @@ class ApiModule {
     }
 
     @Provides
-    fun retrofitDataService(provideRetrofit: Retrofit) = provideRetrofit.create(RetrofitMainInterface::class.java)
+    fun retrofitDataService(provideRetrofit: Retrofit) = provideRetrofit.create(
+        RetrofitMainInterface::class.java)
 }
