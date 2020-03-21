@@ -11,22 +11,21 @@ import io.reactivex.disposables.CompositeDisposable
 
 class DetailMovieViewModel(private val networkRepository: NetworkRepository) : ViewModel() {
     private val mutableLiveDataDetailsModel = MutableLiveData<DetailMovieResponse>()
-    private val compositeDisposable = CompositeDisposable()
-
+    private val disposable = CompositeDisposable()
 
     fun characterDetailsViewModel(id: Int): LiveData<DetailMovieResponse> {
-        compositeDisposable.add(networkRepository.getDetailMovie(id,API_KEY)
+        disposable.add(networkRepository.getDetailMovie(id, API_KEY)
             .subscribe({ detailMovieResponse ->
                 mutableLiveDataDetailsModel.value = detailMovieResponse
             }, {
-                Log.d("detail", it.message)
-            }))
-
+                Log.d("detail", it.message.orEmpty())
+            })
+        )
         return mutableLiveDataDetailsModel
     }
 
-    fun clear() {
-        compositeDisposable.clear()
-
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 }
