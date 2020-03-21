@@ -1,17 +1,18 @@
 package com.moviefinder.android.features.detailmovie
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-
+import androidx.lifecycle.ViewModelProviders
 import com.moviefinder.android.R
 import com.moviefinder.android.base.MyApplication
 import com.moviefinder.android.base.ViewModelFactory
+import com.moviefinder.android.models.DetailMovieResponse
+import com.moviefinder.android.utils.Constants.Companion.DOLLAR_UNIT
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
@@ -19,58 +20,59 @@ import javax.inject.Inject
 class DetailMovieFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    lateinit var detailsViewModel: DetailMovieViewModel
+    private var movieID: Int? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         MyApplication.apiComponent.inject(this)
     }
-    private var fragmentHolder: Fragment? = null
-    lateinit var detailsViewModel: DetailMovieViewModel
-    private var movieID: Int ? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.detail_fragment, container, false)
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentHolder = this
         init()
-        detailsViewModel = ViewModelProviders.of(this,viewModelFactory).get(DetailMovieViewModel::class.java)
-
-        setViewWithData()
+        initViewModel()
+        observeDetailMovie()
     }
 
     private fun init() {
         val bundle = arguments
         movieID = bundle!!.getInt("movieId", 0)
+        observeDetailMovie()
     }
 
-    private fun setViewWithData() {
-        detailsViewModel.characterDetailsViewModel(movieID!!).observe(viewLifecycleOwner, Observer { detailsModel ->
-            Picasso.get()
-                .load("https://image.tmdb.org/t/p/original" + detailsModel.backDropPath)
-                .centerInside()
-                .fit()
-                .into(imgMovie)
-            txtTitle!!.text = detailsModel.originalTitle
-            txtRateAverage!!.text = detailsModel.voteAverage.toString()
-            txtOverView!!.text = detailsModel.overview
-
-            if (!detailsModel.genres.isNullOrEmpty())
-                txtGenres!!.text = detailsModel.genres[0].name
-
-            txtRevenue!!.text = detailsModel.revenue.toString() + " $"
-            txtBudget!!.text = detailsModel.budget.toString() + " $"
-        })
+    private fun initViewModel() {
+        detailsViewModel =
+            ViewModelProviders.of(this, viewModelFactory)
+                .get(DetailMovieViewModel::class.java)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        detailsViewModel.clear()
+    private fun observeDetailMovie() {
+        detailsViewModel.characterDetailsViewModel(movieID!!).observe(viewLifecycleOwner,
+            Observer {
+                setViewWithData(it)
+            })
+    }
+
+    private fun setViewWithData(detailMovieResponse: DetailMovieResponse) {
+        Picasso.get()
+            .load("https://image.tmdb.org/t/p/original" + detailMovieResponse.backDropPath)
+            .centerInside().fit().into(imgMovie)
+        txtTitle.text = detailMovieResponse.originalTitle
+        txtRateAverage.text = detailMovieResponse.voteAverage.toString()
+        txtOverView.text = detailMovieResponse.overview
+        if (detailMovieResponse.genres.isNullOrEmpty())
+            txtGenres.text = detailMovieResponse.genres[0].name
+        val revenue = "$DOLLAR_UNIT ${detailMovieResponse.revenue}"
+        val budget = "$DOLLAR_UNIT ${detailMovieResponse.budget}"
+        txtRevenue.text = revenue
+        txtBudget.text = budget
     }
 }
