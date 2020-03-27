@@ -3,11 +3,9 @@ package com.moviefinder.android.features.movielist
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -29,11 +27,11 @@ import javax.inject.Inject
 class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private var movieListAdapter: MovieListAdapter = MovieListAdapter(MovieListDiffUtils())
-    private var resultSearchList: List<ResultSearch> = mutableListOf()
     lateinit var navController: NavController
     lateinit var movieListViewModel: MovieListViewModel
     lateinit var layoutManager: LinearLayoutManager
+    private var movieListAdapter: MovieListAdapter = MovieListAdapter(MovieListDiffUtils())
+    private var resultSearchList: List<ResultSearch> = mutableListOf()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,7 +62,10 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     private fun initViewModel() {
         movieListViewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory).get(MovieListViewModel::class.java)
+            ViewModelProvider(
+                requireActivity(),
+                viewModelFactory
+            ).get(MovieListViewModel::class.java)
     }
 
     private fun setOnClickListenerForImageSearchView() {
@@ -110,7 +111,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun refreshDataForPagination() {
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         movieListViewModel.fetchMovieSearchData(
             edtMovieSearch.text.toString(),
             true
@@ -119,9 +120,13 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     private fun observeMovieList() {
         movieListViewModel.getAllMovie()
-            .observe(viewLifecycleOwner, Observer {
-                movieListAdapter.submitList(it)
-                progressBar.visibility = View.GONE
+            .observe(viewLifecycleOwner, Observer { response ->
+                response.fold({
+                    movieListAdapter.submitList(it.data)
+                    progressBar.visibility = View.GONE
+                }, {
+                    Log.d("MyTag", it.message.orEmpty())
+                })
             })
         movieListViewModel.fetchMovieSearchData(edtMovieSearch.text.toString(), true)
     }

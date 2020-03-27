@@ -1,23 +1,22 @@
 package com.moviefinder.android.features.movielist
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moviefinder.android.models.ResultSearch
 import com.moviefinder.android.repository.network.NetworkRepository
 import com.moviefinder.android.utils.Constants.Companion.API_KEY
+import com.moviefinder.android.utils.DataResource
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieListViewModel(private val networkRepository: NetworkRepository) : ViewModel() {
+class MovieListViewModel constructor(private val networkRepository: NetworkRepository) : ViewModel() {
     private var page = 1
     private var movieName = ""
     private var list = mutableListOf<ResultSearch>()
     private var isLoading = false
     private var shouldLoadMore = true
-    private val compositeDisposable = CompositeDisposable()
-    private val mutableLiveDataResultSearch = MutableLiveData<List<ResultSearch>>()
+    private val disposable = CompositeDisposable()
+    private val movieListData = MutableLiveData<DataResource<List<ResultSearch>>>()
 
     fun fetchMovieSearchData(movieName: String, isLoadMore: Boolean) {
 
@@ -26,20 +25,17 @@ class MovieListViewModel(private val networkRepository: NetworkRepository) : Vie
             this.movieName = movieName
 
         prepareDataToSearch(isLoadMore)
-        compositeDisposable.add(
-            networkRepository.getMovieSearch(movieName,API_KEY, page)
+        disposable.add(
+            networkRepository.getMovieSearch(movieName, API_KEY, page)
                 .subscribe({
                     isLoading = false
                     if (it.resultSearchList.isEmpty())
                         shouldLoadMore = false
-
                     list.addAll(it.resultSearchList)
-                    mutableLiveDataResultSearch.value = list
-
+                    movieListData.value = DataResource.Success(list)
                 }, {
                     isLoading = false
-                    mutableLiveDataResultSearch.value = null
-                    Log.d("MyTag", it.message.orEmpty())
+                    movieListData.value = DataResource.Error(it.message.orEmpty())
                 })
         )
     }
@@ -56,12 +52,10 @@ class MovieListViewModel(private val networkRepository: NetworkRepository) : Vie
     }
 
 
-    fun getAllMovie(): LiveData<List<ResultSearch>> = mutableLiveDataResultSearch
+    fun getAllMovie(): LiveData<DataResource<List<ResultSearch>>> = movieListData
 
-
-    fun clear() {
-        compositeDisposable.clear()
-
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
-
 }

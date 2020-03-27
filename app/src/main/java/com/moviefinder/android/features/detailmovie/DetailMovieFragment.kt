@@ -2,10 +2,9 @@ package com.moviefinder.android.features.detailmovie
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.moviefinder.android.R
@@ -34,6 +33,7 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
         init()
         initViewModel()
         observeDetailMovie()
+        setOnClickListenerViews()
     }
 
     private fun init() {
@@ -50,8 +50,12 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
 
     private fun observeDetailMovie() {
         detailsViewModel.characterDetailsViewModel(movieID!!).observe(viewLifecycleOwner,
-            Observer {
-                setViewWithData(it)
+            Observer {response->
+                response.fold({
+                    it.data?.let { detailResponse -> setViewWithData(detailResponse) }
+                },{
+                    Log.d("detail", it.message.orEmpty())
+                })
             })
     }
 
@@ -68,5 +72,18 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
         val budget = "$DOLLAR_UNIT ${detailMovieResponse.budget}"
         txtRevenue.text = revenue
         txtBudget.text = budget
+    }
+
+    private fun setOnClickListenerViews() {
+        txtBudget.setOnClickListener(viewOnClick())
+    }
+
+    private fun viewOnClick() : View.OnClickListener{
+        return View.OnClickListener {
+            when(it){
+                txtBudget ->
+                    Toast.makeText(requireContext(),"budjet",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
