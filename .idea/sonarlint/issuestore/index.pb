@@ -54,8 +54,6 @@ v
 Fapp/src/main/java/com/moviefinder/android/repository/DataRepository.kt,2\8\28f4ad44c051cf34efe080534d43e2a526cdcd52
 {
 Kapp/src/main/java/com/moviefinder/android/retrofit/RetrofitMainInterface.kt,6\0\602b5c0a038048eb75ee14139607091acc1015af
-r
-Bapp/src/main/java/com/moviefinder/android/features/MainActivity.kt,8\4\84cdee7af0ec403d7a0298670015bddca6381acd
 o
 ?app/src/main/java/com/moviefinder/android/base/MyApplication.kt,3\4\345b173c53bae081906fde829b05476da60a8426
 l
@@ -84,3 +82,9 @@ Bapp/src/main/java/com/moviefinder/android/base/ViewModelFactory.kt,c\7\c7f6a40
 Uapp/src/main/java/com/moviefinder/android/features/detailmovie/DetailMovieFragment.kt,6\d\6d086012498340e0bbba4c33e3748b38251b47d9
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+i
+9app/src/main/java/com/moviefinder/android/MainActivity.kt,b\1\b1b926f39c9a629e203557e8a7b8f437eac64fd5
+[
++app/src/main/res/layout/detail_fragment.xml,0\4\04a9dd6ad89eb9988d63e73218e1271bc2acabb7

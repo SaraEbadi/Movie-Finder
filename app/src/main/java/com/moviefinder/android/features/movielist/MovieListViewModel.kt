@@ -39,7 +39,7 @@ class MovieListViewModel(private val networkRepository: NetworkRepository) : Vie
                 }, {
                     isLoading = false
                     mutableLiveDataResultSearch.value = null
-                    Log.d("MyTag", it.message)
+                    Log.d("MyTag", it.message.orEmpty())
                 })
         )
     }
@@ -57,10 +57,6 @@ class MovieListViewModel(private val networkRepository: NetworkRepository) : Vie
 
 
     fun getAllMovie(): LiveData<List<ResultSearch>> = mutableLiveDataResultSearch
-
-//    fun clear() {
-//        networkRepository.clear()
-//    }
 
 
     fun clear() {

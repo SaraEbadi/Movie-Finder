@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.moviefinder.android.R
+import com.moviefinder.android.base.BaseFragment
 import com.moviefinder.android.base.MyApplication
 import com.moviefinder.android.base.ViewModelFactory
 import com.moviefinder.android.models.DetailMovieResponse
@@ -17,7 +18,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.detail_fragment.*
 import javax.inject.Inject
 
-class DetailMovieFragment : Fragment() {
+class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var detailsViewModel: DetailMovieViewModel
@@ -26,13 +27,6 @@ class DetailMovieFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         MyApplication.apiComponent.inject(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +44,7 @@ class DetailMovieFragment : Fragment() {
 
     private fun initViewModel() {
         detailsViewModel =
-            ViewModelProviders.of(this, viewModelFactory)
+            ViewModelProvider(this, viewModelFactory)
                 .get(DetailMovieViewModel::class.java)
     }
 
