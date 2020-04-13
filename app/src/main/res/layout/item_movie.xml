@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="12dp"
     android:elevation="4dp">
 
@@ -31,8 +32,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:contentDescription="@string/img_description" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -42,8 +43,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="West World"
-            android:textSize="20dp"
+            tools:text="West World"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,14 +59,15 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/txtTitleMovie"
-            app:srcCompat="@drawable/ic_star" />
+            app:srcCompat="@drawable/ic_star"
+            android:contentDescription="@string/img_description" />
 
         <TextView
             android:id="@+id/txtVoteAverage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
+            tools:text="TextView"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="@+id/imgViewVote"
             app:layout_constraintStart_toEndOf="@+id/imgViewVote"
@@ -77,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Release Date: "
+            tools:text="Release Date: "
             android:textColor="@color/colorWhite"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/txtVoteAverage" />
@@ -87,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="TextView"
+            tools:text="TextView"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="@+id/releaseText"
             app:layout_constraintStart_toEndOf="@+id/releaseText"

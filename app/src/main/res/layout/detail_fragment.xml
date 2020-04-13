@@ -33,10 +33,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="west world"
+                tools:text="west world"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
-                android:textSize="22dp"
+                android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgMovie" />
 
@@ -52,12 +52,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtTitle"
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/shape_edt_rate"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:padding="2dp"
                 android:gravity="center"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
         <View
             android:id="@+id/devider"
@@ -70,12 +68,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hidden"
             android:layout_margin="30dp"/>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Revenue"
+            tools:text="Revenue"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgViewVote"
@@ -117,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="Budget"
+            tools:text="Budget"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toStartOf="@+id/imgViewVote"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +131,6 @@
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
         <View
             android:id="@+id/devider2"
@@ -151,9 +149,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Description"
+            tools:text="Description"
             android:textColor="@color/colorWhite"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/devider2" />
