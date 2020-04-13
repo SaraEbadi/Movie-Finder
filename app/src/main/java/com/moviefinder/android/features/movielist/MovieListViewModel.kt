@@ -9,7 +9,8 @@ import com.moviefinder.android.utils.Constants.Companion.API_KEY
 import com.moviefinder.android.utils.DataResource
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieListViewModel constructor(private val networkRepository: NetworkRepository) : ViewModel() {
+class MovieListViewModel constructor(private val networkRepository: NetworkRepository) :
+    ViewModel() {
     private var page = 1
     private var movieName = ""
     private var list = mutableListOf<ResultSearch>()
@@ -19,7 +20,6 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
     private val movieListData = MutableLiveData<DataResource<List<ResultSearch>>>()
 
     fun fetchMovieSearchData(movieName: String, isLoadMore: Boolean) {
-
         if (isLoading) return
         if (movieName.isNotEmpty())
             this.movieName = movieName
@@ -50,7 +50,6 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
             shouldLoadMore = true
         }
     }
-
 
     fun getAllMovie(): LiveData<DataResource<List<ResultSearch>>> = movieListData
 

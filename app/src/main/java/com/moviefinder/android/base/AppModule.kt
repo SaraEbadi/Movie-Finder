@@ -4,16 +4,16 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule constructor(myApplication: MyApplication){
+class AppModule constructor(myApplication: MyApplication) {
 
-    var myApplication : MyApplication
+    var myApplication: MyApplication
 
     init {
         this.myApplication = myApplication
     }
 
     @Provides
-    fun provideMyRetroApplication():MyApplication{
+    fun provideMyRetroApplication(): MyApplication {
         return myApplication
     }
 }

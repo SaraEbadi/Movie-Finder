@@ -50,10 +50,10 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
 
     private fun observeDetailMovie() {
         detailsViewModel.characterDetailsViewModel(movieID!!).observe(viewLifecycleOwner,
-            Observer {response->
+            Observer { response ->
                 response.fold({
                     it.data?.let { detailResponse -> setViewWithData(detailResponse) }
-                },{
+                }, {
                     Log.d("detail", it.message.orEmpty())
                 })
             })
@@ -78,11 +78,11 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
         txtBudget.setOnClickListener(viewOnClick())
     }
 
-    private fun viewOnClick() : View.OnClickListener{
+    private fun viewOnClick(): View.OnClickListener {
         return View.OnClickListener {
-            when(it){
+            when (it) {
                 txtBudget ->
-                    Toast.makeText(requireContext(),"budjet",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "budjet", Toast.LENGTH_SHORT).show()
             }
         }
     }

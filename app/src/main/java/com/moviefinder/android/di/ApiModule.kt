@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
 
 @Module
 class ApiModule {
-
     @Provides
     fun providerOKHttpClient(): OkHttpClient {
 
@@ -32,7 +31,7 @@ class ApiModule {
     }
 
     @Provides
-    fun provideRetrofit( okHttpClient: OkHttpClient) : Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_URL)
@@ -43,5 +42,6 @@ class ApiModule {
 
     @Provides
     fun retrofitDataService(provideRetrofit: Retrofit) = provideRetrofit.create(
-        RetrofitMainInterface::class.java)
+        RetrofitMainInterface::class.java
+    )
 }

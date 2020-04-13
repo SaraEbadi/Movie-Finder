@@ -6,5 +6,5 @@ data class Genres(
     @SerializedName("id")
     var id: Int = 0,
     @SerializedName("name")
-var name: String? = null
+    var name: String? = null
 )
