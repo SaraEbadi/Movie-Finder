@@ -7,7 +7,6 @@ import dagger.Component
 
 @Component(modules = [ApiModule::class])
 interface APIComponent {
-
     fun inject(mainFragment: MovieListFragment)
     fun inject(detailsFragment: DetailMovieFragment)
     fun inject(viewModelFactory: ViewModelFactory)

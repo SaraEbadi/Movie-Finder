@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieFinder</string>
+    <string name="img_description">ImageDescription</string>
 </resources>

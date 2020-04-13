@@ -13,8 +13,6 @@ b
 2app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml,8\e\8e27ba16c655f421171956147d0fde89b7d25d17
 h
 8app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml,6\e\6ec7d34b130497a10dc92abcde9b313d370a89df
-S
-#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
 R
 "app/src/main/res/values/styles.xml,f\7\f79cc2688e29fcbc286fda14ae07b27c9e83690f
 P
@@ -82,9 +80,7 @@ Bapp/src/main/java/com/moviefinder/android/base/ViewModelFactory.kt,c\7\c7f6a40
 Uapp/src/main/java/com/moviefinder/android/features/detailmovie/DetailMovieFragment.kt,6\d\6d086012498340e0bbba4c33e3748b38251b47d9
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-Y
-)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
 i
 9app/src/main/java/com/moviefinder/android/MainActivity.kt,b\1\b1b926f39c9a629e203557e8a7b8f437eac64fd5
-[
-+app/src/main/res/layout/detail_fragment.xml,0\4\04a9dd6ad89eb9988d63e73218e1271bc2acabb7
+o
+?app/src/main/java/com/moviefinder/android/utils/DataResource.kt,5\5\555e58fa106936758d8d4d4e0389f1cb40e89598

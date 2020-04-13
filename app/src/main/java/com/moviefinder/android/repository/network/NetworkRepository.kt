@@ -9,8 +9,8 @@ import io.reactivex.schedulers.Schedulers
 
 import javax.inject.Inject
 
-class NetworkRepository @Inject constructor(private val retrofitMainInterface: RetrofitMainInterface) {
-
+class NetworkRepository @Inject constructor(
+    private val retrofitMainInterface: RetrofitMainInterface) {
     fun getMovieSearch(keySearchMovie: String, apiKey: String, page: Int): Single<MovieModel> {
         return retrofitMainInterface
             .getSearchMovie(keySearchMovie, apiKey, page)
@@ -24,5 +24,4 @@ class NetworkRepository @Inject constructor(private val retrofitMainInterface: R
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-
 }

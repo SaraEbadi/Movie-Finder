@@ -14,7 +14,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:contentDescription="@string/img_description" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/hidden"
@@ -98,7 +99,8 @@
             app:layout_constraintEnd_toEndOf="@+id/devider"
             app:layout_constraintStart_toStartOf="@+id/devider"
             app:layout_constraintTop_toBottomOf="@+id/devider"
-            app:srcCompat="@drawable/ic_star" />
+            app:srcCompat="@drawable/ic_star"
+            android:contentDescription="@string/img_description" />
 
         <TextView
             android:id="@+id/txtRateAverage"
