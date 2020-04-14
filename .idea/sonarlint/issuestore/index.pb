@@ -84,3 +84,7 @@ i
 9app/src/main/java/com/moviefinder/android/MainActivity.kt,b\1\b1b926f39c9a629e203557e8a7b8f437eac64fd5
 o
 ?app/src/main/java/com/moviefinder/android/utils/DataResource.kt,5\5\555e58fa106936758d8d4d4e0389f1cb40e89598
+n
+>app/src/main/java/com/moviefinder/android/base/BaseFragment.kt,6\7\67e17ab7beb39093b0154ebd7994990b11e34df0
+W
+'app/src/main/res/drawable/shape_img.xml,8\c\8c501d3b684c35e29aca8b01a960a55c55ea5fed
