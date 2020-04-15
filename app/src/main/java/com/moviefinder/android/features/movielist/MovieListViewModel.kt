@@ -13,10 +13,10 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
     ViewModel() {
     private var page = 1
     private var movieName = ""
-    private var list = mutableListOf<ResultSearch>()
     private var isLoading = false
     private var shouldLoadMore = true
     private val disposable = CompositeDisposable()
+    private val list = mutableListOf<ResultSearch>()
     private val movieListData = MutableLiveData<DataResource<List<ResultSearch>>>()
 
     fun fetchMovieSearchData(movieName: String, isLoadMore: Boolean) {

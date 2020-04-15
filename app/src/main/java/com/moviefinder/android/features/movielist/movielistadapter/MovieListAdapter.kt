@@ -34,7 +34,6 @@ class MovieListAdapter(diffCallback: DiffUtil.ItemCallback<ResultSearch>) :
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-
         fun bind(resultSearch: ResultSearch) {
             Picasso.get()
                 .load("$BASE_URL_IMAGE ${resultSearch.posterPath}")

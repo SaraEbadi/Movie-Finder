@@ -30,8 +30,8 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     lateinit var navController: NavController
     lateinit var movieListViewModel: MovieListViewModel
     lateinit var layoutManager: LinearLayoutManager
-    private var movieListAdapter: MovieListAdapter = MovieListAdapter(MovieListDiffUtils())
-    private var resultSearchList: List<ResultSearch> = mutableListOf()
+    private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
+    private val resultSearchList = mutableListOf<ResultSearch>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

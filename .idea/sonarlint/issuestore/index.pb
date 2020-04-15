@@ -88,3 +88,7 @@ n
 >app/src/main/java/com/moviefinder/android/base/BaseFragment.kt,6\7\67e17ab7beb39093b0154ebd7994990b11e34df0
 W
 'app/src/main/res/drawable/shape_img.xml,8\c\8c501d3b684c35e29aca8b01a960a55c55ea5fed
+\
+,app/src/main/res/layout/activity_threads.xml,b\f\bfa8460aa65fdbef3ae97efbdfa79cb81f55076c
+w
+Gapp/src/main/java/com/moviefinder/android/features/ThreadsActivity.java,0\a\0a925a9a093d8eab45ccafdf7605079a21edf53f
