@@ -15,13 +15,10 @@ import java.util.concurrent.TimeUnit
 class ApiModule {
     @Provides
     fun providerOKHttpClient(): OkHttpClient {
-
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BASIC
-
         return OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
@@ -41,7 +38,6 @@ class ApiModule {
     }
 
     @Provides
-    fun retrofitDataService(provideRetrofit: Retrofit) = provideRetrofit.create(
-        RetrofitMainInterface::class.java
-    )
+    fun retrofitDataService(provideRetrofit: Retrofit) =
+        provideRetrofit.create(RetrofitMainInterface::class.java)
 }
