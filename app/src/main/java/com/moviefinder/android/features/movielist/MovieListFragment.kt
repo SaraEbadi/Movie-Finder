@@ -61,11 +61,8 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun initViewModel() {
-        movieListViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                viewModelFactory
-            ).get(MovieListViewModel::class.java)
+        movieListViewModel = ViewModelProvider(requireActivity(), viewModelFactory)
+            .get(MovieListViewModel::class.java)
     }
 
     private fun setOnClickListenerForImageSearchView() {
