@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieModel(
     @SerializedName("page")
-    var page: Int,
+    val page: Int,
     @SerializedName("results")
-    var resultSearchList: List<ResultSearch> = mutableListOf(),
+    val resultSearchList: List<ResultSearch> = mutableListOf(),
     @SerializedName("total_results")
-    var totalResults: Int,
+    val totalResults: Int,
     @SerializedName("total_pages")
-    var totalPages: Int
+    val totalPages: Int
 )

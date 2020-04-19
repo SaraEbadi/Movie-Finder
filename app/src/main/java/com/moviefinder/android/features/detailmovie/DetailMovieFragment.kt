@@ -20,7 +20,7 @@ import javax.inject.Inject
 class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var detailsViewModel: DetailMovieViewModel
+    private lateinit var detailsViewModel: DetailMovieViewModel
     private var movieID: Int? = null
 
     override fun onAttach(context: Context) {

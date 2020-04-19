@@ -19,6 +19,13 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
     private val list = mutableListOf<ResultSearch>()
     private val movieListData = MutableLiveData<DataResource<List<ResultSearch>>>()
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
+
+    fun getAllMovie(): LiveData<DataResource<List<ResultSearch>>> = movieListData
+
     fun fetchMovieSearchData(movieName: String, isLoadMore: Boolean) {
         if (isLoading) return
         if (movieName.isNotEmpty())
@@ -49,12 +56,5 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
             list.clear()
             shouldLoadMore = true
         }
-    }
-
-    fun getAllMovie(): LiveData<DataResource<List<ResultSearch>>> = movieListData
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable.clear()
     }
 }

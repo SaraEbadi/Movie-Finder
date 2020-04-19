@@ -14,6 +14,11 @@ class DetailMovieViewModel constructor(private val networkRepository: NetworkRep
     private val mutableLiveDataDetailsModel = MutableLiveData<DataResource<DetailMovieResponse>>()
     private val disposable = CompositeDisposable()
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
+
     fun characterDetailsViewModel(id: Int): LiveData<DataResource<DetailMovieResponse>> {
         disposable.add(
             networkRepository.getDetailMovie(id, API_KEY)
@@ -24,10 +29,5 @@ class DetailMovieViewModel constructor(private val networkRepository: NetworkRep
                 })
         )
         return mutableLiveDataDetailsModel
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable.clear()
     }
 }

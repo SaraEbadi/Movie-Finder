@@ -27,9 +27,9 @@ import javax.inject.Inject
 class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var navController: NavController
-    lateinit var movieListViewModel: MovieListViewModel
-    lateinit var layoutManager: LinearLayoutManager
+    private lateinit var movieListViewModel: MovieListViewModel
+    private lateinit var navController: NavController
+    private lateinit var layoutManager: LinearLayoutManager
     private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
     private val resultSearchList = mutableListOf<ResultSearch>()
 
@@ -42,7 +42,6 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         init()
-
     }
 
     override fun onClickListener(view: View, position: Int) {
