@@ -11,16 +11,15 @@
         android:id="@+id/edtMovieSearch"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/shape_edt"
-        android:hint="enter movie name"
+        android:hint="@string/edt_hint_search_movie"
         android:inputType="text"
         android:maxLength="18"
         android:padding="8dp"
         android:layout_marginStart="4dp"
         android:textDirection="rtl"
-        app:layout_constraintBottom_toTopOf="@+id/movieRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgSearchMovie"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,29 +36,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edtMovieSearch" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movieRecyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/prgMovieList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/edtMovieSearch" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/prgMovieList"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/colorWhite"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/movieRecyclerView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -107,7 +107,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun refreshDataForPagination() {
-        progressBar.visibility = View.VISIBLE
+        prgMovieList.visibility = View.VISIBLE
         movieListViewModel.fetchMovieSearchData(
             edtMovieSearch.text.toString(),
             true
@@ -119,7 +119,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
             .observe(viewLifecycleOwner, Observer { response ->
                 response.fold({
                     movieListAdapter.submitList(it.data)
-                    progressBar.visibility = View.GONE
+                    prgMovieList.visibility = View.GONE
                 }, {
                     Log.d("MyTag", it.message.orEmpty())
                 })
