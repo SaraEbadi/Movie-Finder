@@ -11,32 +11,31 @@
         android:id="@+id/edtMovieSearch"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/shape_edt"
         android:hint="enter movie name"
         android:inputType="text"
         android:maxLength="18"
         android:padding="8dp"
+        android:layout_marginStart="4dp"
         android:textDirection="rtl"
         app:layout_constraintBottom_toTopOf="@+id/movieRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgSearchMovie"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgSearchMovie"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:paddingStart="5dp"
+        android:contentDescription="@string/img_description"
+        android:padding="6dp"
+        android:layout_marginStart="4dp"
         android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toTopOf="@+id/movieRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/edtMovieSearch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/img_description" />
+        app:layout_constraintTop_toTopOf="@+id/edtMovieSearch" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
