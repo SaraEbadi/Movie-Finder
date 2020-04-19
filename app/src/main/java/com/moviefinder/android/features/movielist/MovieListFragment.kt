@@ -41,6 +41,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
+        observeMovieList()
         init()
     }
 
@@ -115,7 +116,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun observeMovieList() {
-        movieListViewModel.getAllMovie()
+        movieListViewModel.movieList(edtMovieSearch.text.toString(), true)
             .observe(viewLifecycleOwner, Observer { response ->
                 response.fold({
                     movieListAdapter.submitList(it.data)
@@ -124,6 +125,5 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
                     Log.d("MyTag", it.message.orEmpty())
                 })
             })
-        movieListViewModel.fetchMovieSearchData(edtMovieSearch.text.toString(), true)
     }
 }
