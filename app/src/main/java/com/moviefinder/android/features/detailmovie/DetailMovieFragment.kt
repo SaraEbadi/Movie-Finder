@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.moviefinder.android.R
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var detailsViewModel: DetailMovieViewModel
+    private val detailsViewModel: DetailMovieViewModel by viewModels { viewModelFactory }
     private var movieID: Int? = null
 
     override fun onAttach(context: Context) {
@@ -31,7 +32,6 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        initViewModel()
         observeDetailMovie()
         setOnClickListenerViews()
     }
@@ -40,12 +40,6 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
         val bundle = arguments
         movieID = bundle!!.getInt("movieId", 0)
         observeDetailMovie()
-    }
-
-    private fun initViewModel() {
-        detailsViewModel =
-            ViewModelProvider(this, viewModelFactory)
-                .get(DetailMovieViewModel::class.java)
     }
 
     private fun observeDetailMovie() {

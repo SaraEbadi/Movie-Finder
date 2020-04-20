@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,10 +27,10 @@ import javax.inject.Inject
 class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var movieListViewModel: MovieListViewModel
     private lateinit var navController: NavController
     private lateinit var layoutManager: LinearLayoutManager
     private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
+    private val viewModel: MovieListViewModel by viewModels { viewModelFactory }
     private val resultSearchList = mutableListOf<ResultSearch>()
 
     override fun onAttach(context: Context) {
@@ -40,7 +40,6 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
         observeMovieList()
         init()
     }
@@ -57,11 +56,6 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     private fun init() {
         generateMovieLists()
         setOnClickListenerForImageSearchView()
-    }
-
-    private fun initViewModel() {
-        movieListViewModel = ViewModelProvider(requireActivity(), viewModelFactory)
-            .get(MovieListViewModel::class.java)
     }
 
     private fun setOnClickListenerForImageSearchView() {
@@ -108,14 +102,14 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     private fun refreshDataForPagination() {
         prgMovieList.visibility = View.VISIBLE
-        movieListViewModel.fetchMovieSearchData(
+        viewModel.fetchMovieSearchData(
             edtMovieSearch.text.toString(),
             true
         )
     }
 
     private fun observeMovieList() {
-        movieListViewModel.movieList(edtMovieSearch.text.toString(), true)
+        viewModel.movieList(edtMovieSearch.text.toString(), true)
             .observe(viewLifecycleOwner, Observer { response ->
                 response.fold({
                     movieListAdapter.submitList(it.data)
