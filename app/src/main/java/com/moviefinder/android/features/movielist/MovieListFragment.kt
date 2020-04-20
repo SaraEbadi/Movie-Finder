@@ -52,7 +52,6 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
         detailsFragment.arguments = bundle
         navController = Navigation.findNavController(requireActivity(), R.id.navHostFragment)
         navController.navigate(R.id.action_movieListFragment_to_detailMovieFragment, bundle)
-
     }
 
     private fun init() {
