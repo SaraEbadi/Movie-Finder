@@ -90,3 +90,7 @@ W
 ,app/src/main/res/layout/activity_threads.xml,b\f\bfa8460aa65fdbef3ae97efbdfa79cb81f55076c
 w
 Gapp/src/main/java/com/moviefinder/android/features/ThreadsActivity.java,0\a\0a925a9a093d8eab45ccafdf7605079a21edf53f
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+_
+/app/src/main/res/layout/movie_list_fragment.xml,2\2\22494c91c89ce05923b7617106d08519cc263f02

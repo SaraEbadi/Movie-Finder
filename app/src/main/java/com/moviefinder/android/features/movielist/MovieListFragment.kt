@@ -27,9 +27,9 @@ import javax.inject.Inject
 class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
     private lateinit var navController: NavController
     private lateinit var layoutManager: LinearLayoutManager
-    private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
     private val viewModel: MovieListViewModel by viewModels { viewModelFactory }
     private val resultSearchList = mutableListOf<ResultSearch>()
 

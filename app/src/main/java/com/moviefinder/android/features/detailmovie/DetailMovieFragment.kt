@@ -21,8 +21,8 @@ import javax.inject.Inject
 class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private val detailsViewModel: DetailMovieViewModel by viewModels { viewModelFactory }
     private var movieID: Int? = null
+    private val detailsViewModel: DetailMovieViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
