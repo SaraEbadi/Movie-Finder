@@ -11,13 +11,12 @@ import io.reactivex.disposables.CompositeDisposable
 
 class MovieListViewModel constructor(private val networkRepository: NetworkRepository) :
     ViewModel() {
-    private var page = 1
-    private var movieName = ""
-    private var isLoading = false
-    private var shouldLoadMore = true
-    private val disposable = CompositeDisposable()
-    private val list = mutableListOf<ResultSearch>()
     private val movieListData = MutableLiveData<DataResource<List<ResultSearch>>>()
+    private val list = mutableListOf<ResultSearch>()
+    private val disposable = CompositeDisposable()
+    private var shouldLoadMore = true
+    private var isLoading = false
+    private var page = 1
 
     override fun onCleared() {
         super.onCleared()
@@ -31,21 +30,17 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
     }
 
     fun fetchMovieSearchData(movieName: String, isLoadMore: Boolean) {
-        if (isLoading) return
-        if (movieName.isNotEmpty())
-            this.movieName = movieName
+        if (!shouldLoadMore) return
 
-        prepareDataToSearch(isLoadMore)
+        page++
         disposable.add(
             networkRepository.getMovieSearch(movieName, API_KEY, page)
                 .subscribe({
-                    isLoading = false
                     if (it.resultSearchList.isEmpty())
                         shouldLoadMore = false
                     list.addAll(it.resultSearchList)
                     movieListData.value = DataResource.Success(list)
                 }, {
-                    isLoading = false
                     movieListData.value = DataResource.Error(it.message.orEmpty())
                 })
         )
@@ -54,7 +49,6 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
     private fun prepareDataToSearch(isLoadMore: Boolean) {
         isLoading = true
         if (isLoadMore && shouldLoadMore) {
-            page++
         } else {
             page = 1
             list.clear()
