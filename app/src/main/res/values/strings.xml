@@ -2,4 +2,6 @@
     <string name="app_name">MovieFinder</string>
     <string name="img_description">ImageDescription</string>
     <string name="edt_hint_search_movie">enter movie name</string>
+    <string name="back_button">دکمه بازگشت</string>
+    <string name="optional_button">دکمه دلخواه</string>
 </resources>
