@@ -7,15 +7,18 @@
     tools:context=".features.detailmovie.DetailMovieFragment"
     android:background="@color/colorBoldGray">
 
+        <include
+            layout="@layout/item_toolbar" />
+
         <ImageView
             android:id="@+id/imgMovie"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:contentDescription="@string/img_description"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/img_description" />
+            app:layout_constraintTop_toBottomOf="@+id/item_toolbar" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/hidden"

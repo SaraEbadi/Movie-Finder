@@ -8,10 +8,10 @@
     android:layout_marginStart="12dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="12dp"
-    android:background="@drawable/shape_et"
+    android:background="@drawable/shape_box_white"
     android:elevation="4dp"
     android:visibility="gone"
-    tools:visibility="visible"
+    tools:visibility="gone"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">

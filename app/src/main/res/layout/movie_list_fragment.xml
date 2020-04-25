@@ -7,34 +7,37 @@
     android:background="@color/colorBoldGray"
     tools:context=".features.movielist.MovieListFragment">
 
-    <EditText
-        android:id="@+id/edtMovieSearch"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/shape_edt"
-        android:hint="@string/edt_hint_search_movie"
-        android:inputType="text"
-        android:maxLength="18"
-        android:padding="8dp"
-        android:layout_marginStart="4dp"
-        android:textDirection="rtl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgSearchMovie"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/item_toolbar"/>
+    <include layout="@layout/item_search_header"/>
 
-    <ImageView
-        android:id="@+id/imgSearchMovie"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="@string/img_description"
-        android:padding="6dp"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/edtMovieSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edtMovieSearch" />
+<!--    <EditText-->
+<!--        android:id="@+id/edtMovieSearch"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="@drawable/shape_edt"-->
+<!--        android:hint="@string/edt_hint_search_movie"-->
+<!--        android:inputType="text"-->
+<!--        android:maxLength="18"-->
+<!--        android:padding="8dp"-->
+<!--        android:layout_marginStart="4dp"-->
+<!--        android:textDirection="rtl"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/imgSearchMovie"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imgSearchMovie"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:contentDescription="@string/img_description"-->
+<!--        android:padding="6dp"-->
+<!--        android:layout_marginStart="4dp"-->
+<!--        android:src="@drawable/ic_search"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/edtMovieSearch"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/edtMovieSearch" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movieRecyclerView"
@@ -44,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@id/prgMovieList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtMovieSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/item_toolbar" />
 
     <ProgressBar
         android:id="@+id/prgMovieList"

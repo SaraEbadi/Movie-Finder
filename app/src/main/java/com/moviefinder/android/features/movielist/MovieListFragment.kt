@@ -1,10 +1,12 @@
 package com.moviefinder.android.features.movielist
 
+import android.animation.Animator
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,10 +23,13 @@ import com.moviefinder.android.features.movielist.movielistadapter.IMovieOnItemL
 import com.moviefinder.android.features.movielist.movielistadapter.MovieListAdapter
 import com.moviefinder.android.features.movielist.movielistadapter.MovieListDiffUtils
 import com.moviefinder.android.models.ResultSearch
+import kotlinx.android.synthetic.main.item_search_header.*
+import kotlinx.android.synthetic.main.item_toolbar.*
 import kotlinx.android.synthetic.main.movie_list_fragment.*
 import javax.inject.Inject
 
-class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener {
+class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnItemListener
+,View.OnClickListener{
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private var movieListAdapter = MovieListAdapter(MovieListDiffUtils())
@@ -32,6 +37,8 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     private lateinit var layoutManager: LinearLayoutManager
     private val viewModel: MovieListViewModel by viewModels { viewModelFactory }
     private val resultSearchList = mutableListOf<ResultSearch>()
+    private var imm: InputMethodManager? = null
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,6 +47,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        resourceViewAssign()
         observeMovieList()
         init()
     }
@@ -54,12 +62,15 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun init() {
+        imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         generateMovieLists()
         setOnClickListenerForImageSearchView()
+        imgLeft.setOnClickListener(this)
+        imgRight.setOnClickListener(this)
     }
 
     private fun setOnClickListenerForImageSearchView() {
-        imgSearchMovie.setOnClickListener {
+        imgSearchBox.setOnClickListener {
             hideKeyboard()
             observeMovieList()
         }
@@ -103,13 +114,13 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     private fun refreshDataForPagination() {
         prgMovieList.visibility = View.VISIBLE
         viewModel.fetchMovieSearchData(
-            edtMovieSearch.text.toString(),
+            edtSearchBox.text.toString(),
             true
         )
     }
 
     private fun observeMovieList() {
-        viewModel.movieList(edtMovieSearch.text.toString(), true)
+        viewModel.movieList(edtSearchBox.text.toString(), true)
             .observe(viewLifecycleOwner, Observer { response ->
                 response.fold({
                     movieListAdapter.submitList(it.data)
@@ -119,4 +130,58 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
                 })
             })
     }
+
+    private fun resourceViewAssign(){
+        imgLeft.setImageResource(R.drawable.ic_back_white)
+        imgRight.setImageResource(R.drawable.ic_search)
+    }
+
+    private fun openSearchBox(v: View) {
+//        searchCard.makeVisible()
+        imgLeft.isClickable = false
+        imgRight.isClickable = false
+        edtSearchBox.isClickable = true
+        val circularReveal = ViewAnimationUtils.createCircularReveal(
+            searchCard,
+            (imgRight.right + imgRight.left) / 2,
+            (imgRight.top + imgRight.bottom) / 2,
+            0f, v.width.toFloat()
+        )
+        circularReveal.duration = 300
+        circularReveal.start()
+    }
+
+    private fun closeSearchBox(v: View) {
+//        removeSearch()
+        imm?.hideSoftInputFromWindow(imgClose.windowToken, 0)
+        edtSearchBox.text.clear()
+        val circularConceal = ViewAnimationUtils.createCircularReveal(
+            searchCard,
+            (imgRight.right + imgRight.left) / 2,
+            (imgRight.top + imgRight.bottom) / 2,
+            v.width.toFloat(), 0f
+        )
+        circularConceal.duration = 200
+        circularConceal.start()
+        circularConceal.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) = Unit
+            override fun onAnimationCancel(animation: Animator?) = Unit
+            override fun onAnimationStart(animation: Animator?) = Unit
+            override fun onAnimationEnd(animation: Animator?) {
+                searchCard.visibility = View.INVISIBLE
+                imgLeft.isClickable = true
+                imgRight.isClickable = true
+                edtSearchBox.isClickable = false
+                circularConceal.removeAllListeners()
+            }
+        })
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            imgClose -> closeSearchBox(requireView())
+            imgRight -> openSearchBox(requireView())
+        }
+    }
+
 }
