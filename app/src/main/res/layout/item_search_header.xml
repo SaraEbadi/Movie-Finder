@@ -12,7 +12,6 @@
     android:elevation="4dp"
     android:visibility="gone"
     tools:visibility="visible"
-    app:layout_constraintBottom_toBottomOf="@id/include"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_search" />
+        app:srcCompat="@drawable/ic_search_gray" />
 
     <ImageView
         android:id="@+id/imgClose"
@@ -65,7 +64,7 @@
         android:layout_height="match_parent"
         android:layout_toStartOf="@+id/imgSearchBox"
         android:layout_toEndOf="@+id/imgClose"
-        android:background="@drawable/shape_btn_bredcrumb"
+        android:background="@drawable/shape_box_gray"
         android:hint="@string/search"
         android:imeOptions="actionSearch"
         android:importantForAutofill="no"

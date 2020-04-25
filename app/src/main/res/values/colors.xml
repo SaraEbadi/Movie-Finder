@@ -5,5 +5,9 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000</color>
-    <color name="colorGray">#1E2124</color>
+    <color name="colorBoldGray">#1E2124</color>
+    <color name="colorPaleGray">#878D99</color>
+    <color name="WhitishGray">#c6c8cc</color>
+    <color name="colorWhiteTransparent">#28FFFFFF</color>
+    <color name="colorBorderPaleGray">#E9EAEB</color>
 </resources>
