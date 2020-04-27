@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -134,10 +135,11 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     private fun resourceViewAssign(){
         imgLeft.setImageResource(R.drawable.ic_back_white)
         imgRight.setImageResource(R.drawable.ic_search)
+        imgRight.setColorFilter(ContextCompat.getColor(requireContext(), android.R.color.white))
     }
 
     private fun openSearchBox(v: View) {
-//        searchCard.makeVisible()
+        searchCard.visibility = View.VISIBLE
         imgLeft.isClickable = false
         imgRight.isClickable = false
         edtSearchBox.isClickable = true
@@ -152,7 +154,6 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
     }
 
     private fun closeSearchBox(v: View) {
-//        removeSearch()
         imm?.hideSoftInputFromWindow(imgClose.windowToken, 0)
         edtSearchBox.text.clear()
         val circularConceal = ViewAnimationUtils.createCircularReveal(

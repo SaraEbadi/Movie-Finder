@@ -70,8 +70,8 @@ dependencies {
     // GSon
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    // Rxjava and RxAndroid
-    implementation "io.reactivex.rxjava3:rxjava:3.0.0"
+    // RxJava and RxAndroid
+    implementation "io.reactivex.rxjava3:rxjava:3.0.2"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
 
@@ -90,7 +90,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // Saved state module for ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha01"
 
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
