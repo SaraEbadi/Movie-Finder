@@ -7,12 +7,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.moviefinder.android.R
 import com.moviefinder.android.base.BaseFragment
 import com.moviefinder.android.base.MyApplication
 import com.moviefinder.android.base.ViewModelFactory
 import com.moviefinder.android.models.DetailMovieResponse
+import com.moviefinder.android.utils.Constants.Companion.BASE_URL_IMAGE
 import com.moviefinder.android.utils.Constants.Companion.DOLLAR_UNIT
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.detail_fragment.*
@@ -53,17 +53,15 @@ class DetailMovieFragment : BaseFragment(R.layout.detail_fragment) {
             })
     }
 
-    private fun setViewWithData(detailMovieResponse: DetailMovieResponse) {
-        Picasso.get()
-            .load("https://image.tmdb.org/t/p/original" + detailMovieResponse.backDropPath)
+    private fun setViewWithData(data: DetailMovieResponse) {
+        Picasso.get().load(BASE_URL_IMAGE + data.backDropPath)
             .centerInside().fit().into(imgMovie)
-        txtTitle.text = detailMovieResponse.originalTitle
-        txtRateAverage.text = detailMovieResponse.voteAverage.toString()
-        txtOverView.text = detailMovieResponse.overview
-        if (detailMovieResponse.genres.isNullOrEmpty())
-            txtGenres.text = detailMovieResponse.genres[0].name
-        val revenue = "$DOLLAR_UNIT ${detailMovieResponse.revenue}"
-        val budget = "$DOLLAR_UNIT ${detailMovieResponse.budget}"
+        txtTitle.text = data.originalTitle
+        txtRateAverage.text = data.voteAverage.toString()
+        txtOverView.text = data.overview
+        txtGenres.text = data.genres[0].name
+        val revenue = DOLLAR_UNIT + data.revenue
+        val budget = DOLLAR_UNIT + data.budget
         txtRevenue.text = revenue
         txtBudget.text = budget
     }
