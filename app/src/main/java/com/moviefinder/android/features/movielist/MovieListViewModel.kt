@@ -23,9 +23,7 @@ class MovieListViewModel constructor(private val networkRepository: NetworkRepos
         disposable.clear()
     }
 
-    fun movieList(movieName: String, isLoadMore: Boolean):
-            LiveData<DataResource<List<ResultSearch>>> {
-        fetchMovieSearchData(movieName,isLoadMore)
+    fun movieList(): LiveData<DataResource<List<ResultSearch>>> {
         return movieListData
     }
 

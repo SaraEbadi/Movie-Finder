@@ -68,6 +68,7 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
         setOnClickListenerForImageSearchView()
         imgLeft.setOnClickListener(this)
         imgRight.setOnClickListener(this)
+        imgClose.setOnClickListener(this)
     }
 
     private fun setOnClickListenerForImageSearchView() {
@@ -100,7 +101,8 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (isFreshData()) {
-                    refreshDataForPagination()
+                    prgMovieList.visibility = View.VISIBLE
+                    observeMovieList()
                 }
             }
         })
@@ -114,15 +116,11 @@ class MovieListFragment : BaseFragment(R.layout.movie_list_fragment), IMovieOnIt
 
     private fun refreshDataForPagination() {
         prgMovieList.visibility = View.VISIBLE
-        viewModel.fetchMovieSearchData(
-            edtSearchBox.text.toString(),
-            true
-        )
+        viewModel.fetchMovieSearchData(edtSearchBox.text.toString(), true)
     }
 
     private fun observeMovieList() {
-        viewModel.movieList(edtSearchBox.text.toString(), true)
-            .observe(viewLifecycleOwner, Observer { response ->
+        viewModel.movieList().observe(viewLifecycleOwner, Observer { response ->
                 response.fold({
                     movieListAdapter.submitList(it.data)
                     prgMovieList.visibility = View.GONE
